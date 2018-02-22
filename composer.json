@@ -1,0 +1,25 @@
+{
+  "name": "nverjus/training-blog",
+  "description": "PHP blog for training",
+  "type": "project",
+  "autoload": {
+    "psr-4": {
+      "NV\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "require": {
+    "twig/twig": "2"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "7"
+  },
+  "authors": [{
+    "name": "Nicolas Verjus",
+    "email": "nverjus@protonmail.com"
+  }]
+}
