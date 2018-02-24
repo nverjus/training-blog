@@ -1,0 +1,6 @@
+database:
+  dms:      "mysql"
+  host:     "localhost"
+  dbname:   "blog"
+  user:     "root"
+  password: ""

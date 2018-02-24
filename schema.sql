@@ -1,3 +1,17 @@
+DROP DATABASE IF EXISTS blog;
+CREATE DATABASE blog;
+USE blog;
+
+DROP TABLE IF EXISTS Article;
+CREATE TABLE Article (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(100) NOT NULL,
+  subTitle VARCHAR(100),
+  content TEXT NOT NULL,
+  publicationDate DATETIME NOT NULL
+)ENGINE=InnoDB;
+
+
 INSERT INTO Article (title, subTitle, content, publicationDate)
 VALUES
 ('Article 1', 'Test1', ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam condimentum mauris vel nisl volutpat suscipit. Mauris vehicula sodales urna malesuada pharetra. Suspendisse potenti. Vestibulum vel ultrices mauris. Cras hendrerit urna sapien, eget convallis justo fermentum non. Donec et dignissim nulla, sit amet suscipit enim. Fusce justo sapien, malesuada ac imperdiet quis, tempus eget justo. Aenean ac nulla vulputate, consectetur neque vitae, luctus dui. In cursus pharetra libero, quis luctus mauris ultricies at. Nam purus nibh, lacinia sit amet congue in, scelerisque at eros. Quisque rutrum augue nulla, ac porttitor dui tincidunt eu. Vivamus accumsan, lectus vitae finibus pharetra, nunc sem posuere ante, pretium fermentum sapien mi porttitor nunc. Donec venenatis sit amet sem vel euismod. Vestibulum quis enim ante.

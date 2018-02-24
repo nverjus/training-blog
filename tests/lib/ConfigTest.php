@@ -25,7 +25,7 @@ class ConfigTest extends TestCase
       'host'     => 'localhost',
       'dbname'   =>'blog',
       'user'     => 'root',
-      'password' => "g30PenYe",
+      'password' => "",
     ];
         $this->assertSame($expected, $this->config->getDatabaseInfos());
     }
