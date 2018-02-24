@@ -1,5 +1,7 @@
 <?php
-namespace NV\Entity;
+namespace Entity;
+
+use NV\Entity;
 
 class Article extends Entity
 {
@@ -31,9 +33,9 @@ class Article extends Entity
         }
     }
 
-    public function setPublicationDate(\DateTime $publicationDate)
+    public function setPublicationDate($publicationDate)
     {
-        $this->publicationDate = $publicationDate;
+        $this->publicationDate = new \DateTime($publicationDate);
     }
 
     public function setContent($content)

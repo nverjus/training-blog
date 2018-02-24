@@ -1,5 +1,5 @@
 <?php
-namespace NV\Entity;
+namespace NV;
 
 abstract class Entity
 {
@@ -41,7 +41,7 @@ abstract class Entity
     public function setId($id)
     {
         if ((int) $id > 0) {
-            $this->id = $id;
+            $this->id = (int) $id;
         }
     }
 }

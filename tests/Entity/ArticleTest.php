@@ -2,7 +2,7 @@
 namespace Tests\Entity;
 
 use PHPUnit\Framework\TestCase;
-use NV\Entity\Article;
+use Entity\Article;
 
 class ArticleTest extends TestCase
 {
@@ -10,13 +10,12 @@ class ArticleTest extends TestCase
 
     public function setUp()
     {
-        $dateTest = new \DateTime('2018-06-06 05:06:05');
         $data = [];
         $data['id'] = 10;
         $data['title']= "Test Unitaire";
         $data['subTitle'] = "Sous-titre";
-        $data['publicationDate'] = $dateTest;
-        $data ['content'] = "lalalalalalalalalala";
+        $data['publicationDate'] = '2018-06-06 05:06:05';
+        $data['content'] = "lalalalalalalalalala";
 
         $this->article = new Article($data);
     }
@@ -37,11 +36,9 @@ class ArticleTest extends TestCase
 
     public function testIsNew()
     {
-        $dateTest = new \DateTime('2018-06-06 05:06:05');
         $data = [];
         $data['title']= "Test Unitaire";
         $data['subTitle'] = "Sous-titre";
-        $data['publicationDate'] = $dateTest;
         $data ['content'] = "lalalalalalalalalala";
         $this->article = new Article($data);
 

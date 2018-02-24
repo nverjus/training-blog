@@ -1,4 +1,4 @@
-language: php
+language:       php
 php:
   - '7.1'
   - '7.2'
@@ -6,3 +6,6 @@ php:
 script:
   - composer install
   - vendor/bin/phpunit
+
+notifications:
+  email:        false
