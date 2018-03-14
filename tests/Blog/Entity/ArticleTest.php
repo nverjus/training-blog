@@ -2,7 +2,7 @@
 namespace Tests\Entity;
 
 use PHPUnit\Framework\TestCase;
-use Entity\Article;
+use Blog\Entity\Article;
 
 class ArticleTest extends TestCase
 {

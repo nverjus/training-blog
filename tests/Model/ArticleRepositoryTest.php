@@ -2,47 +2,48 @@
 namespace Tests\lib;
 
 use PHPUnit\Framework\TestCase;
-use NV\Managers;
-use NV\Config;
+use NV\Manager;
+use Blog\BlogApplication;
 use Entity\Article;
 
-class ArticleManagerTest extends TestCase
+class ArticleRepositoryTest extends TestCase
 {
     private $manager;
 
     public function setUp()
     {
-        $config = new Config;
-        $managers = new Managers($config->getDatabaseInfos());
-        $this->manager = $managers->getManagerOf('Article');
+        $app = new BlogApplication;
+        $config = $app->getConfig();
+        $manager = new Manager($app);
+        $this->repository = $manager->getRepository('Article');
     }
 
     public function tearDown()
     {
-        $this->manager = null;
+        $this->repository = null;
     }
 
     public function testFindLastX()
     {
-        $articles = $this->manager->findLastX(2);
+        $articles = $this->repository->findLastX(2);
         $this->assertEquals(2, count($articles));
     }
 
     public function testFindLastXEqualZero()
     {
         $this->expectException('InvalidArgumentException');
-        $articles = $this->manager->findLastX(0);
+        $articles = $this->repository->findLastX(0);
     }
 
     public function testFindLastXNegative()
     {
         $this->expectException('InvalidArgumentException');
-        $articles = $this->manager->findLastX(-1);
+        $articles = $this->repository->findLastX(-1);
     }
 
     public function testFindLastXNoNumeric()
     {
         $this->expectException('TypeError');
-        $articles = $this->manager->findLastX('i');
+        $articles = $this->repository->findLastX('i');
     }
 }

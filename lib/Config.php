@@ -3,11 +3,11 @@ namespace NV;
 
 use Symfony\Component\Yaml\Yaml;
 
-class Config
+class Config extends ApplicationComponent
 {
     private function read()
     {
-        return Yaml::parseFile(__DIR__.'/../src/config/config.yml');
+        return Yaml::parseFile(__DIR__.'/../src/'.$this->app->getName().'/config/config.yml');
     }
 
     public function getDatabaseInfos()

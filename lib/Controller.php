@@ -1,14 +1,17 @@
 <?php
 namespace NV;
 
-abstract class Controller
+abstract class Controller extends ApplicationComponent
 {
-    protected $config;
-    protected $managers;
+    protected $manager;
 
-    public function __construct()
+    public function __construct($app)
     {
-        $this->config = new Config;
-        $this->managers = new Managers($this->config->getDatabaseInfos());
+        parent::__construct($app)
+        $this->managers = new Manager($this->app);
+    }
+
+    public function execute()
+    {
     }
 }

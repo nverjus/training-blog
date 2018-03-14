@@ -1,10 +1,10 @@
 <?php
-namespace Model;
+namespace Blog\Repository;
 
-use NV\Manager;
-use Entity\Article;
+use NV\Repository;
+use Blog\Entity\Article;
 
-class ArticleManager extends Manager
+class ArticleRepository extends Repository
 {
     public function findLastX(int $numberOfArticle)
     {

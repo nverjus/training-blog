@@ -3,24 +3,24 @@ namespace Tests\lib;
 
 use PHPUnit\Framework\TestCase;
 use NV\PDOFactory;
-use NV\Config;
+use Blog\BlogApplication;
 
 class PDOFactoryTest extends TestCase
 {
-    private $config;
+    private $app;
 
     public function setUp()
     {
-        $this->config = new Config();
+        $this->app = new BlogApplication;
     }
 
     public function tearDown()
     {
         $this->config = null;
     }
-    public function testGetMysqlConnexion()
+    public function testGetDatabaseConnexion()
     {
-        $db = PDOFactory::getMysqlConnexion($this->config->getDatabaseInfos());
+        $db = PDOFactory::getDatabaseConnexion($this->app->getConfig());
 
         $this->assertInstanceOf(\PDO::class, $db);
     }

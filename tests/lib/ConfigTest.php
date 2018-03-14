@@ -3,6 +3,7 @@ namespace Tests\lib;
 
 use PHPUnit\Framework\TestCase;
 use NV\Config;
+use Blog\BlogApplication;
 
 class ConfigTest extends TestCase
 {
@@ -10,7 +11,8 @@ class ConfigTest extends TestCase
 
     public function setUp()
     {
-        $this->config = new Config();
+        $app = new BlogApplication;
+        $this->config = $app->getConfig();
     }
 
     public function tearDown()
@@ -21,7 +23,7 @@ class ConfigTest extends TestCase
     public function testReadDatabaseInfos()
     {
         $expected = [
-      'dms'      => 'mysql',
+      'dms'      => 'MySQL',
       'host'     => 'localhost',
       'dbname'   =>'blog',
       'user'     => 'root',

@@ -1,5 +1,5 @@
 database:
-  dms:      "mysql"
+  dms:      "MySQL"
   host:     "localhost"
   dbname:   "blog"
   user:     "root"

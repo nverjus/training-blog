@@ -1,5 +1,5 @@
 <?php
-namespace Entity;
+namespace Blog\Entity;
 
 use NV\Entity;
 

@@ -2,9 +2,9 @@
 namespace Tests\lib;
 
 use PHPUnit\Framework\TestCase;
-use NV\Managers;
-use NV\Config;
-use Entity\Article;
+use NV\Repository;
+use NV\Manager;
+use Blog\BlogApplication;
 
 class ManagerTest extends TestCase
 {
@@ -12,9 +12,8 @@ class ManagerTest extends TestCase
 
     public function setUp()
     {
-        $config = new Config;
-        $managers = new Managers($config->getDatabaseInfos());
-        $this->manager = $managers->getManagerOf('Article');
+        $app = new BlogApplication;
+        $this->manager = new Manager($app);
     }
 
     public function tearDown()
@@ -22,41 +21,16 @@ class ManagerTest extends TestCase
         $this->manager = null;
     }
 
-    public function testFindAll()
-    {
-        $articles = $this->manager->findAll();
-        $article = $articles[0];
-        $this->assertInstanceOf(Article::class, $article);
-    }
-
-    public function testFindAllDesc()
-    {
-        $articles = $this->manager->findAll(true);
-        $article = $articles[0];
-        $this->assertInstanceOf(Article::class, $article);
-    }
-
-    public function testFindById()
-    {
-        $article = $this->manager->findById(1);
-        $this->assertEquals(1, $article->getId());
-    }
-
-    public function testFindByIdEqualZero()
+    public function testGetRepositoryOfClassDontExists()
     {
         $this->expectException('InvalidArgumentException');
-        $article = $this->manager->findById(0);
+        $this->manager->getRepository('Lala');
     }
 
-    public function testFindByIdLessThanZero()
+    public function testGetRepositoryOfClassExists()
     {
-        $this->expectException('InvalidArgumentException');
-        $article = $this->manager->findById(-1);
-    }
+        $repository = $this->manager->getRepository('Article');
 
-    public function testFindByIdNoInteger()
-    {
-        $this->expectException('TypeError');
-        $article = $this->manager->findById('e');
+        $this->assertInstanceOf(Repository::class, $repository);
     }
 }
