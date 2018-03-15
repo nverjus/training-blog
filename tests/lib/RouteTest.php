@@ -14,7 +14,7 @@ class RouteTest extends TestCase
         $this->varsNames[] = 'id';
         $this->route = new Route(array(
           'url' => '/article/([0-9]+)',
-          'controller' => 'blog',
+          'module' => 'blog',
           'action' => 'index',
           'varsNames' => $this->varsNames,
         ));
@@ -29,7 +29,7 @@ class RouteTest extends TestCase
     public function testRouteCreation()
     {
         $this->assertSame('/article/([0-9]+)', $this->route->getUrl());
-        $this->assertSame('blog', $this->route->getController());
+        $this->assertSame('blog', $this->route->getModule());
         $this->assertSame('index', $this->route->getAction());
         $this->assertSame($this->varsNames, $this->route->getVarsNames());
     }
@@ -43,7 +43,7 @@ class RouteTest extends TestCase
     {
         $this->route = new Route(array(
         'url' => '/',
-        'controller' => 'blog',
+        'module' => 'blog',
         'action' => 'index',
       ));
 

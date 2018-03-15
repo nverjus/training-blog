@@ -37,11 +37,11 @@ abstract class Application
 
         $route = $router->getRoute($this->request->requestURI());
 
-        $controllerClass  = $this->name.'\\Controller\\'.ucfirst($route->getController().'Controller');
+        $controllerClass  = $this->name.'\\Controller\\'.ucfirst($route->getModule().'Controller');
 
         if (class_exists($controllerClass)) {
             $_GET = array_merge($_GET, $route->getVars());
-            $controller = new $controllerClass($this, $route->getAction());
+            $controller = new $controllerClass($this, $route->getAction(), $route->getModule());
             return $controller;
         }
         throw new \RuntimeException('The requested controller \''.$controllerClass.'\' does not exists');

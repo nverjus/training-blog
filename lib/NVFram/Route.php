@@ -4,7 +4,7 @@ namespace NVFram;
 class Route
 {
     protected $url;
-    protected $controller;
+    protected $module;
     protected $action;
     protected $varsNames;
     protected $vars = [];
@@ -42,15 +42,15 @@ class Route
         }
     }
 
-    public function getController()
+    public function getModule()
     {
-        return $this->controller;
+        return $this->module;
     }
 
-    public function setController($controller)
+    public function setmodule($module)
     {
-        if (is_string($controller)) {
-            $this->controller = $controller;
+        if (is_string($module)) {
+            $this->module = $module;
         }
     }
 

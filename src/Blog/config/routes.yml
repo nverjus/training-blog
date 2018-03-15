@@ -1,16 +1,26 @@
 index:
   url:                        /
-  controller:                 front
+  module:                     front
   action :                    index
 
 article_view:
   url:                        /article/([0-9]+)
-  controller:                 front
+  module:                     front
   action:                     articleView
   varsNames:
         - id
 
 test_controller_dont_exists:
   url:                        /test/controller
-  controller:                 nope
+  module:                     nope
   action:                     nope
+
+test_action_dont_exists:
+  url:                        /test/action
+  module:                     front
+  action:                     lalala         
+
+test_execute:
+  url:                        /test/execute
+  module:                     front
+  action:                     test
