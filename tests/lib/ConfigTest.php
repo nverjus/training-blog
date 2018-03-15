@@ -2,7 +2,7 @@
 namespace Tests\lib;
 
 use PHPUnit\Framework\TestCase;
-use NV\Config;
+use NVFram\Config;
 use Blog\BlogApplication;
 
 class ConfigTest extends TestCase

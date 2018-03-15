@@ -1,5 +1,5 @@
 <?php
-namespace NV;
+namespace NVFram;
 
 abstract class Repository extends ApplicationComponent
 {
@@ -9,7 +9,7 @@ abstract class Repository extends ApplicationComponent
     public function __construct($app, $entity)
     {
         parent::__construct($app);
-        $this->db = PDOFactory::getDatabaseConnexion($this->app->getConfig());
+        $this->db = PDOFactory::getDatabaseConnexion($this->app->getConfig()->getDatabaseInfos());
         $this->entity = $entity;
     }
 

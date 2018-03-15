@@ -1,5 +1,5 @@
 <?php
-namespace NV;
+namespace NVFram;
 
 class Manager extends ApplicationComponent
 {

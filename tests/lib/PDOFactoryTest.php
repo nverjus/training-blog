@@ -2,7 +2,7 @@
 namespace Tests\lib;
 
 use PHPUnit\Framework\TestCase;
-use NV\PDOFactory;
+use NVFram\PDOFactory;
 use Blog\BlogApplication;
 
 class PDOFactoryTest extends TestCase
@@ -16,12 +16,21 @@ class PDOFactoryTest extends TestCase
 
     public function tearDown()
     {
-        $this->config = null;
+        $this->app = null;
     }
-    public function testGetDatabaseConnexion()
+    public function testGetDatabaseConnexionMySQL()
     {
-        $db = PDOFactory::getDatabaseConnexion($this->app->getConfig());
+        $db = PDOFactory::getDatabaseConnexion($this->app->getConfig()->getDatabaseInfos());
 
         $this->assertInstanceOf(\PDO::class, $db);
+    }
+
+    public function testGetDatabaseConnexionNotMySQL()
+    {
+        $data = $this->app->getConfig()->getDatabaseInfos();
+        $data['dms'] = 'PgSQL';
+
+        $this->expectException('InvalidArgumentException');
+        $db = PDOFactory::getDatabaseConnexion($data);
     }
 }

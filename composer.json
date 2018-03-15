@@ -5,7 +5,7 @@
   "autoload": {
     "psr-4": {
       "": "src/",
-      "NV\\": "lib/"
+      "NVFram\\": "lib/NVFram"
     }
   },
   "autoload-dev": {

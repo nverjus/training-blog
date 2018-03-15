@@ -1,19 +1,16 @@
 <?php
-namespace NV;
+namespace NVFram;
 
 class PDOFactory
 {
-    public static function getDatabaseConnexion($config)
+    public static function getDatabaseConnexion($data)
     {
-        $data = $config->getDatabaseInfos();
-
         switch ($data['dms']) {
           case 'MySQL':
             $data['dms'] = 'mysql';
             break;
           default:
             throw new \InvalidArgumentException('Only MySQL is compatible.');
-            break;
         }
 
         $dms = $data['dms'].':host='.$data['host'].';dbname='.$data['dbname'].';charset=utf8';

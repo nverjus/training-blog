@@ -2,8 +2,8 @@
 namespace Tests\lib;
 
 use PHPUnit\Framework\TestCase;
-use NV\Repository;
-use NV\Manager;
+use NVFram\Manager;
+use NVFram\Repository;
 use Blog\BlogApplication;
 
 class ManagerTest extends TestCase
@@ -32,5 +32,10 @@ class ManagerTest extends TestCase
         $repository = $this->manager->getRepository('Article');
 
         $this->assertInstanceOf(Repository::class, $repository);
+    }
+
+    public function testApplicationComponent()
+    {
+        $this->assertInstanceOf(BlogApplication::class, $this->manager->getApp());
     }
 }

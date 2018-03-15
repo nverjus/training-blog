@@ -1,5 +1,5 @@
 <?php
-namespace NV;
+namespace NVFram;
 
 abstract class ApplicationComponent
 {

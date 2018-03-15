@@ -1,7 +1,7 @@
 <?php
 namespace Blog\Repository;
 
-use NV\Repository;
+use NVFram\Repository;
 use Blog\Entity\Article;
 
 class ArticleRepository extends Repository

@@ -1,7 +1,7 @@
 <?php
 namespace Blog;
 
-use NV\Application;
+use NVFram\Application;
 
 class BlogApplication extends Application
 {
