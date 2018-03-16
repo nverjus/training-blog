@@ -39,12 +39,17 @@ abstract class Repository extends ApplicationComponent
             throw new \InvalidArgumentException('The id must be greater than zero');
         }
         $class = $this->app->getName().'\\Entity\\'.$this->entity;
-        $sql = "SELECT * FROM ".$this->entity.' WHERE id='.$id;
+
+        $req = $this->db->prepare('SELECT id, title, subTitle, content, publicationDate FROM '.$this->entity.' WHERE id = :id');
+        $req->bindValue(':id', (int) $id, \PDO::PARAM_INT);
+
+        $req->execute();
 
 
+        if ($data = $req->fetch()) {
+            return new $class($data);
+        }
 
-        $req = $this->db->query($sql);
-
-        return new $class($req->fetch());
+        return null;
     }
 }

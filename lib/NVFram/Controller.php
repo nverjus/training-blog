@@ -10,9 +10,16 @@ abstract class Controller extends ApplicationComponent
     public function __construct($app, $action, $module)
     {
         parent::__construct($app);
-        $this->managers = new Manager($this->app);
+        $this->manager = new Manager($this->app);
         $this->action = $action;
         $this->module = $module;
+    }
+
+    public function render($view, array $vars = array())
+    {
+        $loader = new \Twig_Loader_Filesystem(__DIR__.'/../../src/'.$this->app->getName().'/Views/'.ucfirst($this->module));
+        $twig = new \Twig_Environment($loader);
+        return $twig->render($view, $vars);
     }
 
     public function execute()

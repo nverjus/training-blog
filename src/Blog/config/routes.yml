@@ -4,7 +4,7 @@ index:
   action :                    index
 
 article_view:
-  url:                        /article/([0-9]+)
+  url:                        /article-([0-9]+)
   module:                     front
   action:                     articleView
   varsNames:
@@ -17,10 +17,10 @@ test_controller_dont_exists:
 
 test_action_dont_exists:
   url:                        /test/action
-  module:                     front
-  action:                     lalala         
+  module:                     test
+  action:                     lalala
 
 test_execute:
   url:                        /test/execute
-  module:                     front
+  module:                     test
   action:                     test

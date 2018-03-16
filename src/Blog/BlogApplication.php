@@ -7,8 +7,8 @@ class BlogApplication extends Application
 {
     public function __construct()
     {
-        parent::__construct();
         $this->name = 'Blog';
+        parent::__construct();
     }
 
     public function run()

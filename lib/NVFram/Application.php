@@ -8,14 +8,15 @@ abstract class Application
     protected $response;
     protected $name;
     protected $config;
+    protected $twig;
 
     public function __construct()
     {
         $this->request = new Request($this);
         $this->response = new Response($this);
         $this->config = new Config($this);
-
-        $this->name = '';
+        $loader = new \Twig_Loader_Filesystem(__DIR__.'/../../src/'.$this->name.'/Views');
+        $this->twig = new \Twig_Environment($loader);
     }
 
     public function getController()
@@ -28,7 +29,7 @@ abstract class Application
         }
 
         try {
-            $route = $router->getRoute($request->requestURI());
+            $route = $router->getRoute($this->request->requestURI());
         } catch (\RuntimeException $e) {
             if ($e->getCode() == Router::NO_ROUTE) {
                 $this->response->redirect404();
@@ -55,6 +56,11 @@ abstract class Application
     public function getRequest()
     {
         return $this->request;
+    }
+
+    public function getResponse()
+    {
+        return $this->response;
     }
 
     public function getName()

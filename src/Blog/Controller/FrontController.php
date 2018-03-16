@@ -6,8 +6,20 @@ use NVFram\Request;
 
 class FrontController extends Controller
 {
-    public function executeTest(Request $request)
+    public function executeIndex(Request $request)
     {
-        return '1234';
+        return $this->render('index.html.twig', array('a' => 'HAHAHAHAHAHA'));
+    }
+
+    public function executeArticleview(Request $request)
+    {
+        if ($request->getExists('id') && $request->getData('id') > 0) {
+            $article = $this->manager->getRepository('Article')->findById($request->getData('id'));
+
+            if ($article === null) {
+                $this->app->getResponse()->redirect404();
+            }
+            return $this->render('articleView.html.twig', array('article' => $article));
+        }
     }
 }

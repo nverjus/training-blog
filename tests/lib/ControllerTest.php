@@ -30,7 +30,15 @@ class ControllerTest extends TestCase
     {
         $_SERVER['REQUEST_URI'] = '/test/execute';
         $controller = $this->app->getController();
-        
+
         $this->assertSame('1234', $controller->execute());
+    }
+
+    public function testRender()
+    {
+        $_SERVER['REQUEST_URI'] = '/';
+        $controller = $this->app->getController();
+        $result = $controller->execute();
+        $this->assertStringStartsWith('<!DOCTYPE html>', $result);
     }
 }

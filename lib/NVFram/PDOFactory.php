@@ -15,6 +15,8 @@ class PDOFactory
 
         $dms = $data['dms'].':host='.$data['host'].';dbname='.$data['dbname'].';charset=utf8';
 
-        return  new \PDO($dms, $data['user'], $data['password']);
+        $db = new \PDO($dms, $data['user'], $data['password']);
+        $db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+        return $db;
     }
 }

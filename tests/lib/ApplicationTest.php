@@ -28,9 +28,9 @@ class ApplicationTest extends TestCase
 
     public function testGetControllerVarsExtraction()
     {
-        $_SERVER['REQUEST_URI'] = '/article/4';
+        $_SERVER['REQUEST_URI'] = '/article-2';
         $controller = $this->app->getController();
-        $this->assertSame('4', $_GET['id']);
+        $this->assertSame('2', $_GET['id']);
     }
 
     public function testGetControllerDontExists()
