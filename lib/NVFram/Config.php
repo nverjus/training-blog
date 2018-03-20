@@ -20,4 +20,13 @@ class Config extends ApplicationComponent
     {
         return Yaml::parseFile(__DIR__.'/../../src/'.$this->app->getName().'/config/routes.yml');
     }
+
+    public function getNBArticles()
+    {
+        $data = $this->readConfigFile();
+        if (!isset($data['nb_articles']) || ((int) $data['nb_articles'] <= 0)) {
+            $dta['nb_articles'] = 5;
+        }
+        return (int) $data['nb_articles'];
+    }
 }

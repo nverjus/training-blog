@@ -1,6 +1,8 @@
 database:
-  dms:      "MySQL"
-  host:     "localhost"
-  dbname:   "blog"
-  user:     "root"
-  password: ""
+  dms:        "MySQL"
+  host:       "localhost"
+  dbname:     "blog"
+  user:       "root"
+  password:   ""
+
+nb_articles:  5

@@ -8,7 +8,8 @@ class FrontController extends Controller
 {
     public function executeIndex(Request $request)
     {
-        return $this->render('index.html.twig', array('a' => 'HAHAHAHAHAHA'));
+        $articles = $this->manager->getRepository('Article')->findLastX($this->app->getConfig()->getNBArticles());
+        return $this->render('Front/index.html.twig', array('articles' => $articles));
     }
 
     public function executeArticleview(Request $request)
@@ -19,7 +20,7 @@ class FrontController extends Controller
             if ($article === null) {
                 $this->app->getResponse()->redirect404();
             }
-            return $this->render('articleView.html.twig', array('article' => $article));
+            return $this->render('Front/articleView.html.twig', array('article' => $article));
         }
     }
 }
