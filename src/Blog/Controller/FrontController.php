@@ -3,6 +3,7 @@ namespace Blog\Controller;
 
 use NVFram\Controller;
 use NVFram\Request;
+use Blog\Entity\Image;
 
 class FrontController extends Controller
 {
@@ -20,7 +21,18 @@ class FrontController extends Controller
             if ($article === null) {
                 $this->app->getResponse()->redirect404();
             }
+            if ($article->getImageId() !== null) {
+                $article->setImage($this->manager->getRepository('Image')->findById($article->getImageId()));
+            } else {
+                $article->setImage(new Image(array('adress' => 'home-bg.jpg')));
+            }
+
             return $this->render('Front/articleView.html.twig', array('article' => $article));
         }
+    }
+
+    public function executeContact(Request $request)
+    {
+        return $this->render('Front/contact.html.twig');
     }
 }

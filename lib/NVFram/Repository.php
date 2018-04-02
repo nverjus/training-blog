@@ -40,7 +40,7 @@ abstract class Repository extends ApplicationComponent
         }
         $class = $this->app->getName().'\\Entity\\'.$this->entity;
 
-        $req = $this->db->prepare('SELECT id, title, subTitle, content, publicationDate FROM '.$this->entity.' WHERE id = :id');
+        $req = $this->db->prepare('SELECT * FROM '.$this->entity.' WHERE id = :id');
         $req->bindValue(':id', (int) $id, \PDO::PARAM_INT);
 
         $req->execute();

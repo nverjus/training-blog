@@ -10,6 +10,11 @@ article_view:
   varsNames:
         - id
 
+contact:
+  url:                        /contact
+  module:                     front
+  action:                     contact
+
 test_controller_dont_exists:
   url:                        /test/controller
   module:                     nope

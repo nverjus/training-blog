@@ -9,6 +9,8 @@ class Article extends Entity
     protected $subTitle;
     protected $publicationDate;
     protected $content;
+    protected $imageId;
+    protected $image;
 
     public function isValid()
     {
@@ -45,6 +47,18 @@ class Article extends Entity
         }
     }
 
+    public function setImageId($imageId)
+    {
+        if ((int) $imageId > 0) {
+            $this->imageId = $imageId;
+        }
+    }
+
+    public function setImage(Image $image)
+    {
+        $this->image = $image;
+    }
+
     public function getTitle()
     {
         return $this->title;
@@ -63,5 +77,15 @@ class Article extends Entity
     public function getContent()
     {
         return $this->content;
+    }
+
+    public function getImageId()
+    {
+        return $this->imageId;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
     }
 }

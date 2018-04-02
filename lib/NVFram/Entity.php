@@ -22,8 +22,6 @@ abstract class Entity
         return false;
     }
 
-    abstract public function isValid();
-
     public function getId()
     {
         return $this->id;
