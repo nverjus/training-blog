@@ -1,7 +1,9 @@
 index:
-  url:                        /
+  url:                        /([0-9]*)
   module:                     front
   action :                    index
+  varsNames:
+        - page
 
 article_view:
   url:                        /article-([0-9]+)

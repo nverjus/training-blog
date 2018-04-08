@@ -25,7 +25,7 @@ class Config extends ApplicationComponent
     {
         $data = $this->readConfigFile();
         if (!isset($data['nb_articles']) || ((int) $data['nb_articles'] <= 0)) {
-            $dta['nb_articles'] = 5;
+            $data['nb_articles'] = 5;
         }
         return (int) $data['nb_articles'];
     }

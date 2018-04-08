@@ -34,6 +34,6 @@ class ConfigTest extends TestCase
 
     public function testGetNbArticles()
     {
-        $this->assertSame(5, $this->config->getNBArticles());
+        $this->assertSame(2, $this->config->getNBArticles());
     }
 }

@@ -25,25 +25,37 @@ class ArticleRepositoryTest extends TestCase
 
     public function testFindLastX()
     {
-        $articles = $this->repository->findLastX(2);
+        $articles = $this->repository->findLastX(2, 1);
         $this->assertEquals(2, count($articles));
     }
 
     public function testFindLastXEqualZero()
     {
         $this->expectException('InvalidArgumentException');
-        $articles = $this->repository->findLastX(0);
+        $articles = $this->repository->findLastX(0, 3);
     }
 
     public function testFindLastXNegative()
     {
         $this->expectException('InvalidArgumentException');
-        $articles = $this->repository->findLastX(-1);
+        $articles = $this->repository->findLastX(-1, 2);
     }
 
     public function testFindLastXNoNumeric()
     {
         $this->expectException('TypeError');
-        $articles = $this->repository->findLastX('i');
+        $articles = $this->repository->findLastX('i', 1);
+    }
+
+    public function testNbPagesModuloZero()
+    {
+        $nbPages = $this->repository->getNbPages(2);
+        $this->assertSame(2, $nbPages);
+    }
+
+    public function testNbPagesModuloNotZero()
+    {
+        $nbPages = $this->repository->getNbPages(3);
+        $this->assertSame(1, $nbPages);
     }
 }
