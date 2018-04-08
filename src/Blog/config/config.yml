@@ -5,4 +5,4 @@ database:
   user:       "root"
   password:   ""
 
-nb_articles:  5
+nb_articles:  2
