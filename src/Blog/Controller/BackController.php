@@ -57,4 +57,10 @@ class BackController extends Controller
             return $this->render('Back/articleEdit.html.twig', array('article' => $article));
         }
     }
+
+    public function executeArticleDelete(Request $request)
+    {
+        $this->manager->getRepository('Article')->delete($request->getData('id'));
+        $this->app->getResponse()->redirect('/admin');
+    }
 }

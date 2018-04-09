@@ -76,4 +76,11 @@ class ArticleRepository extends Repository
 
         $req->execute();
     }
+
+    public function delete(int $id)
+    {
+        $req = $this->db->prepare('DELETE FROM Article WHERE id = :id');
+        $req->bindValue(':id', $id);
+        $req->execute();
+    }
 }

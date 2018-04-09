@@ -44,12 +44,16 @@
                 </td>
                 <td>
                   <a href="/article-edit-{{ article.id }}">
-                    <i class="fa fa-edit"></i>
+                    <button type="button" class="btn btn-primary">
+                      <i class="fa fa-edit fa-lg"></i>
+                    </button>
                   </a>
                 </td>
                 <td>
-                  <a href="#">
-                    <i class="fa fa-close" style="color: red"></i>
+                  <a href="article-delete-{{ article.id }}">
+                    <button type="button" class="btn btn-danger">
+                      <i class="fa fa-close fa-lg"></i>
+                    </button>
                   </a>
                 </td>
               </tr>

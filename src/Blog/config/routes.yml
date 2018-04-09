@@ -34,6 +34,13 @@ article_edit:
   varsNames:
         - id
 
+article_delete:
+  url:                        /article-delete-([0-9]+)
+  module:                     back
+  action:                     articleDelete
+  varsNames:
+        - id
+
 test_controller_dont_exists:
   url:                        /test/controller
   module:                     nope
