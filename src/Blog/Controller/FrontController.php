@@ -9,21 +9,22 @@ class FrontController extends Controller
 {
     public function executeIndex(Request $request)
     {
+        $page = $request->getData('page');
         $ArticleRepo = $this->manager->getRepository('Article');
-        if ($_GET['page'] === '') {
-            $_GET['page'] = 1;
+        if ($page === '') {
+            $page = 1;
         }
-        if ($_GET['page'] <= 0) {
+        if ($page <= 0) {
             $this->app->getResponse()->redirect404();
         }
-        $articles = $ArticleRepo->findLastX($this->app->getConfig()->getNBArticles(), (int) $_GET['page']);
-        $nbPages = $ArticleRepo->getNbPages($this->app->getConfig()->getNBArticles());
-        if ($_GET['page'] > $nbPages) {
+        $articles = $ArticleRepo->findLastX($this->app->getConfig()->getArticlesPerPage(), (int) $page);
+        $nbPages = $ArticleRepo->getNbPages($this->app->getConfig()->getArticlesPerPage());
+        if ($page > $nbPages) {
             $this->app->getResponse()->redirect404();
         }
         return $this->render('Front/index.html.twig', array(
           'articles' => $articles,
-          'page' => (int) $_GET['page'],
+          'page' => (int) $page,
           'nbPages'=> (int) $nbPages,
         ));
     }

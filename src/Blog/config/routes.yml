@@ -27,6 +27,13 @@ article_add:
   module:                     back
   action:                     articleAdd
 
+article_edit:
+  url:                        /article-edit-([0-9]+)
+  module:                     back
+  action:                     articleEdit
+  varsNames:
+        - id
+
 test_controller_dont_exists:
   url:                        /test/controller
   module:                     nope

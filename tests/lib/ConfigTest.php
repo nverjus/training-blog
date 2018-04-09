@@ -32,8 +32,8 @@ class ConfigTest extends TestCase
         $this->assertSame($expected, $this->config->getDatabaseInfos());
     }
 
-    public function testGetNbArticles()
+    public function testGetArticlesPerPage()
     {
-        $this->assertSame(2, $this->config->getNBArticles());
+        $this->assertSame(5, $this->config->getArticlesPerPage());
     }
 }

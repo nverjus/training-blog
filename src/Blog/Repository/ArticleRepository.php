@@ -49,7 +49,7 @@ class ArticleRepository extends Repository
             if ($article->isNew()) {
                 $this->add($article);
             } else {
-                $this->modify($article);
+                $this->edit($article);
             }
         }
     }
@@ -61,6 +61,18 @@ class ArticleRepository extends Repository
         $req->bindValue(':title', $article->getTitle());
         $req->bindValue(':subTitle', $article->getSubTitle());
         $req->bindValue(':content', $article->getContent());
+
+        $req->execute();
+    }
+
+    public function edit(Article $article)
+    {
+        $req = $this->db->prepare('UPDATE Article SET title = :title, subTitle = :subTitle, content = :content, publicationDate = NOW() WHERE id = :id');
+
+        $req->bindValue(':title', $article->getTitle());
+        $req->bindValue(':subTitle', $article->getSubTitle());
+        $req->bindValue(':content', $article->getContent());
+        $req->bindValue(':id', $article->getId());
 
         $req->execute();
     }

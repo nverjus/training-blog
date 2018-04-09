@@ -19,18 +19,42 @@ class BackController extends Controller
 
     public function executeArticleAdd(Request $request)
     {
-        if ($request->getMethod() == 'POST') {
-            $article = new Article(array());
+        $article = new Article(array());
 
-            $article->setTitle($_POST['title']);
-            $article->setSubTitle($_POST['subTitle']);
-            $article->setContent($_POST['content']);
+
+        if ($request->getMethod() == 'POST') {
+            $article->setTitle($request->postData('title'));
+            $article->setSubTitle($request->postData('subTitle'));
+            $article->setContent($request->postData('content'));
 
             if ($article->isValid()) {
                 $this->manager->getRepository('Article')->save($article);
                 $this->app->getResponse()->redirect('/admin');
             }
         }
-        return $this->render('Back/articleAdd.html.twig');
+        return $this->render('Back/articleAdd.html.twig', array('article' => $article));
+    }
+
+    public function executeArticleEdit(Request $request)
+    {
+        if ($request->getExists('id') && $request->getData('id') > 0) {
+            $article = $this->manager->getRepository('Article')->findById($request->getData('id'));
+
+            if ($article === null) {
+                $this->app->getResponse()->redirect404();
+            }
+
+            if ($request->getMethod() == 'POST') {
+                $article->setTitle($request->postData('title'));
+                $article->setSubTitle($request->postData('subTitle'));
+                $article->setContent($request->postData('content'));
+
+                if ($article->isValid()) {
+                    $this->manager->getRepository('Article')->save($article);
+                    $this->app->getResponse()->redirect('/admin');
+                }
+            }
+            return $this->render('Back/articleEdit.html.twig', array('article' => $article));
+        }
     }
 }

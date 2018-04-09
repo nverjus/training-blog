@@ -21,6 +21,12 @@
   <!-- Main Content -->
   <div class="container">
     <div class="row">
+      <a href="/article-add">
+        <button type="button" class="btn btn-primary">Ajouter un article</button>
+      </a>
+      <br>
+    </div>
+    <div class="row">
       <div class="table-responsive">
         <table class="table table-hover">
           <thead>
@@ -37,7 +43,7 @@
                   <a href="/article-{{ article.id }}">{{ article.title }}</a>
                 </td>
                 <td>
-                  <a href="#">
+                  <a href="/article-edit-{{ article.id }}">
                     <i class="fa fa-edit"></i>
                   </a>
                 </td>

@@ -46,16 +46,4 @@ class ArticleRepositoryTest extends TestCase
         $this->expectException('TypeError');
         $articles = $this->repository->findLastX('i', 1);
     }
-
-    public function testNbPagesModuloZero()
-    {
-        $nbPages = $this->repository->getNbPages(2);
-        $this->assertSame(2, $nbPages);
-    }
-
-    public function testNbPagesModuloNotZero()
-    {
-        $nbPages = $this->repository->getNbPages(3);
-        $this->assertSame(1, $nbPages);
-    }
 }

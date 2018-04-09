@@ -21,12 +21,12 @@ class Config extends ApplicationComponent
         return Yaml::parseFile(__DIR__.'/../../src/'.$this->app->getName().'/config/routes.yml');
     }
 
-    public function getNBArticles()
+    public function getArticlesPerPage()
     {
         $data = $this->readConfigFile();
-        if (!isset($data['nb_articles']) || ((int) $data['nb_articles'] <= 0)) {
-            $data['nb_articles'] = 5;
+        if (!isset($data['articles_per_page']) || ((int) $data['articles_per_page'] <= 0)) {
+            $data['articles_per_page'] = 5;
         }
-        return (int) $data['nb_articles'];
+        return (int) $data['articles_per_page'];
     }
 }
