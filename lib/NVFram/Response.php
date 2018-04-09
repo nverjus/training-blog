@@ -10,6 +10,11 @@ class Response extends ApplicationComponent
         exit($twig->render('404.html.twig'));
     }
 
+    public function redirect(string $uri)
+    {
+        header('Location: '.$uri);
+    }
+
     public function send($response)
     {
         exit($response);

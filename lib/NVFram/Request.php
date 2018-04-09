@@ -8,7 +8,7 @@ class Request extends ApplicationComponent
         return $_SERVER['REQUEST_URI'];
     }
 
-    public function method()
+    public function getMethod()
     {
         return $_SERVER['REQUEST_METHOD'];
     }

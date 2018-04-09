@@ -42,4 +42,26 @@ class ArticleRepository extends Repository
 
         return $nbPages;
     }
+
+    public function save(Article $article)
+    {
+        if ($article->isValid()) {
+            if ($article->isNew()) {
+                $this->add($article);
+            } else {
+                $this->modify($article);
+            }
+        }
+    }
+
+    public function add(Article $article)
+    {
+        $req = $this->db->prepare('INSERT INTO Article SET title = :title, subTitle = :subTitle, content = :content, publicationDate = NOW()');
+
+        $req->bindValue(':title', $article->getTitle());
+        $req->bindValue(':subTitle', $article->getSubTitle());
+        $req->bindValue(':content', $article->getContent());
+
+        $req->execute();
+    }
 }

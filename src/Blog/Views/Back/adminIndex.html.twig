@@ -1,0 +1,57 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Administration -
+{% endblock %}
+{% block content %}
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('img/home-bg.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>Administation</h1>
+            <span class="subheading"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Modify</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for article in articles %}
+              <tr>
+                <td>
+                  <a href="/article-{{ article.id }}">{{ article.title }}</a>
+                </td>
+                <td>
+                  <a href="#">
+                    <i class="fa fa-edit"></i>
+                  </a>
+                </td>
+                <td>
+                  <a href="#">
+                    <i class="fa fa-close" style="color: red"></i>
+                  </a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

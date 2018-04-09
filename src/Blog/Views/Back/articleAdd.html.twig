@@ -1,0 +1,56 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('img/home-bg.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>Administation</h1>
+            <span class="subheading">Ajoutez un article</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+
+        <form action="" method='POST'>
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label>Titre</label>
+              <input type="text" class="form-control" placeholder="Titre" id="title" name="title" required="required">
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label>Sous Titre</label>
+              <input type="text" class="form-control" placeholder="Sous titre" id="subTitle" name="subTitle">
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label>Article</label>
+              <textarea rows="8" class="form-control" placeholder="Article" id="content" name="content" required="required"></textarea>
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+          <br>
+          <div id="success"></div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary" id="sendMessageButton">Envoyez</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

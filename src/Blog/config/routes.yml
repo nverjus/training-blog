@@ -17,6 +17,16 @@ contact:
   module:                     front
   action:                     contact
 
+admin_index:
+  url:                        /admin
+  module:                     back
+  action:                     adminIndex
+
+article_add:
+  url:                        /article-add
+  module:                     back
+  action:                     articleAdd
+
 test_controller_dont_exists:
   url:                        /test/controller
   module:                     nope

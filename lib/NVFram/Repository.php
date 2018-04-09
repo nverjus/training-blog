@@ -13,7 +13,7 @@ abstract class Repository extends ApplicationComponent
         $this->entity = $entity;
     }
 
-    public function findAll(bool $desc = false)
+    public function findAll(bool $desc = true)
     {
         $class = $this->app->getName().'\\Entity\\'.$this->entity;
         $entities = [];
