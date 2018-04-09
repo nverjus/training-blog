@@ -17,8 +17,8 @@ class FrontController extends Controller
         if ($page <= 0) {
             $this->app->getResponse()->redirect404();
         }
-        $articles = $ArticleRepo->findLastX($this->app->getConfig()->getArticlesPerPage(), (int) $page);
-        $nbPages = $ArticleRepo->getNbPages($this->app->getConfig()->getArticlesPerPage());
+        $articles = $ArticleRepo->findLastX($this->app->getConfig()->getParameter('articles_per_page'), (int) $page);
+        $nbPages = $ArticleRepo->getNbPages($this->app->getConfig()->getParameter('articles_per_page'));
         if ($page > $nbPages) {
             $this->app->getResponse()->redirect404();
         }

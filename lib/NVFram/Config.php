@@ -21,12 +21,13 @@ class Config extends ApplicationComponent
         return Yaml::parseFile(__DIR__.'/../../src/'.$this->app->getName().'/config/routes.yml');
     }
 
-    public function getArticlesPerPage()
+
+    public function getParameter($key)
     {
         $data = $this->readConfigFile();
-        if (!isset($data['articles_per_page']) || ((int) $data['articles_per_page'] <= 0)) {
-            $data['articles_per_page'] = 5;
+        if (isset($data[$key])) {
+            return $data[$key];
         }
-        return (int) $data['articles_per_page'];
+        throw new \InvalidArgumentException('Parameter '.$key.' does not exists.');
     }
 }

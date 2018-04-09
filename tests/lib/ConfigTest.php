@@ -34,6 +34,6 @@ class ConfigTest extends TestCase
 
     public function testGetArticlesPerPage()
     {
-        $this->assertSame(5, $this->config->getArticlesPerPage());
+        $this->assertSame(5, $this->config->getParameter('articles_per_page'));
     }
 }
