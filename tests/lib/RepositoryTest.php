@@ -38,8 +38,8 @@ class RepositoryTest extends TestCase
 
     public function testFindById()
     {
-        $article = $this->repository->findById(22);
-        $this->assertEquals(22, $article->getId());
+        $article = $this->repository->findById(1);
+        $this->assertEquals(1, $article->getId());
     }
 
     public function testFindByIdEqualZero()
