@@ -52,4 +52,11 @@ abstract class Repository extends ApplicationComponent
 
         return null;
     }
+
+    public function getLastId()
+    {
+        $req = $this->db->query("SELECT id FROM ".$this->entity.' ORDER BY id DESC LIMIT 1');
+        $data = $req->fetch();
+        return $data['id'];
+    }
 }

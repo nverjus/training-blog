@@ -1,4 +1,4 @@
-<form action="" method='POST'>
+<form action="" method='POST' enctype="multipart/form-data">
   <div class="control-group">
     <div class="form-group floating-label-form-group controls">
       <label>Titre</label>
@@ -10,6 +10,14 @@
     <div class="form-group floating-label-form-group controls">
       <label>Sous Titre</label>
       <input type="text" class="form-control" placeholder="Sous titre" value="{{ article.subTitle }}" name="subTitle">
+      <p class="help-block text-danger"></p>
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="form-group floating-label-form-group controls">
+      <label>Image d'en-tête</label>
+      <input type="hidden" name="MAX_FILE_SIZE" value="4000000">
+      <input type="file" class="form-control" placeholder="Image d'en-tête" name="image">
       <p class="help-block text-danger"></p>
     </div>
   </div>

@@ -23,6 +23,12 @@
       <div class="col-lg-8 col-md-10 mx-auto">
 
         {{ include('Back/articleForm.html.twig') }}
+
+        {% if article.imageId != null %}
+          <a href="/image-delete-{{ article.id }}">
+            <button class="btn btn-primary align-right">Supprimer l'image</button>
+          </a>
+        {% endif %}
       </div>
     </div>
   </div>

@@ -49,7 +49,7 @@ class Article extends Entity
 
     public function setImageId($imageId)
     {
-        if ((int) $imageId > 0) {
+        if ((int) $imageId > 0 || $imageId === null) {
             $this->imageId = $imageId;
         }
     }

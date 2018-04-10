@@ -11,17 +11,16 @@ class FrontController extends Controller
     {
         $page = $request->getData('page');
         $ArticleRepo = $this->manager->getRepository('Article');
+        $nbPages = $ArticleRepo->getNbPages($this->app->getConfig()->getParameter('articles_per_page'));
         if ($page === '') {
             $page = 1;
         }
-        if ($page <= 0) {
+        if ($page <= 0 || $page > $nbPages) {
             $this->app->getResponse()->redirect404();
         }
         $articles = $ArticleRepo->findLastX($this->app->getConfig()->getParameter('articles_per_page'), (int) $page);
         $nbPages = $ArticleRepo->getNbPages($this->app->getConfig()->getParameter('articles_per_page'));
-        if ($page > $nbPages) {
-            $this->app->getResponse()->redirect404();
-        }
+        
         return $this->render('Front/index.html.twig', array(
           'articles' => $articles,
           'page' => (int) $page,

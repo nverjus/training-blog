@@ -6,3 +6,4 @@ database:
   password:         ""
 
 articles_per_page:  5
+upload_dir:         web/img/

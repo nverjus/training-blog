@@ -41,6 +41,13 @@ article_delete:
   varsNames:
         - id
 
+image_delete:
+  url:                        /image-delete-([0-9]+)
+  module:                     back
+  action:                     imageDelete
+  varsNames:
+        - id
+
 test_controller_dont_exists:
   url:                        /test/controller
   module:                     nope

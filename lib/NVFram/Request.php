@@ -32,4 +32,14 @@ class Request extends ApplicationComponent
     {
         return isset($_POST[$var]);
     }
+
+    public function fileData($var)
+    {
+        return isset($_FILES[$var]) ? $_FILES[$var] : null;
+    }
+
+    public function fileExists($var)
+    {
+        return isset($_FILES[$var]);
+    }
 }

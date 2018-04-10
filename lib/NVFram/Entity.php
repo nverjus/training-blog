@@ -1,7 +1,7 @@
 <?php
 namespace NVFram;
 
-abstract class Entity
+abstract class Entity extends ApplicationComponent
 {
     protected $id;
 

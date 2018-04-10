@@ -56,31 +56,33 @@ class ArticleRepository extends Repository
 
     public function add(Article $article)
     {
-        $req = $this->db->prepare('INSERT INTO Article SET title = :title, subTitle = :subTitle, content = :content, publicationDate = NOW()');
+        $req = $this->db->prepare('INSERT INTO Article SET title = :title, subTitle = :subTitle, content = :content, publicationDate = NOW(), imageId = :imageId');
 
         $req->bindValue(':title', $article->getTitle());
         $req->bindValue(':subTitle', $article->getSubTitle());
         $req->bindValue(':content', $article->getContent());
+        $req->bindValue(':imageId', $article->getImageId());
 
         $req->execute();
     }
 
     public function edit(Article $article)
     {
-        $req = $this->db->prepare('UPDATE Article SET title = :title, subTitle = :subTitle, content = :content, publicationDate = NOW() WHERE id = :id');
+        $req = $this->db->prepare('UPDATE Article SET title = :title, subTitle = :subTitle, content = :content, publicationDate = NOW(), imageId = :imageId WHERE id = :id');
 
         $req->bindValue(':title', $article->getTitle());
         $req->bindValue(':subTitle', $article->getSubTitle());
         $req->bindValue(':content', $article->getContent());
+        $req->bindValue(':imageId', $article->getImageId());
         $req->bindValue(':id', $article->getId());
 
         $req->execute();
     }
 
-    public function delete(int $id)
+    public function delete(Article $article)
     {
         $req = $this->db->prepare('DELETE FROM Article WHERE id = :id');
-        $req->bindValue(':id', $id);
+        $req->bindValue(':id', $article->getId());
         $req->execute();
     }
 }
