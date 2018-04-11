@@ -19,6 +19,13 @@ abstract class Controller extends ApplicationComponent
     {
         $loader = new \Twig_Loader_Filesystem(__DIR__.'/../../src/'.$this->app->getName().'/Views');
         $twig = new \Twig_Environment($loader);
+        if ($this->app->getSession()->hasFlash()) {
+            $flash = $this->app->getSession()->getFlash();
+        } else {
+            $flash = null;
+        }
+        $vars = array_merge($vars, array('flash' => $flash));
+
         return $twig->render($view, $vars);
     }
 

@@ -20,6 +20,15 @@
 
   <!-- Main Content -->
   <div class="container">
+    {% if flash is not null %}
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="alert alert-info">
+            <p>{{ flash }}</p>
+          </div>
+        </div>
+      </div>
+    {% endif %}
     <div class="row">
       <a href="/article-add">
         <button type="button" class="btn btn-primary">Ajouter un article</button>
