@@ -9,6 +9,7 @@ abstract class Application
     protected $name;
     protected $config;
     protected $twig;
+    protected $session;
 
     public function __construct()
     {
@@ -17,6 +18,7 @@ abstract class Application
         $this->config = new Config($this);
         $loader = new \Twig_Loader_Filesystem(__DIR__.'/../../src/'.$this->name.'/Views');
         $this->twig = new \Twig_Environment($loader);
+        $this->session = new Session($this);
     }
 
     public function getController()
@@ -66,6 +68,11 @@ abstract class Application
     public function getName()
     {
         return $this->name;
+    }
+
+    public function getSession()
+    {
+        return $this->session;
     }
 
     abstract public function run();

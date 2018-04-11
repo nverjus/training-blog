@@ -37,6 +37,7 @@ class BackController extends Controller
 
             if ($article->isValid()) {
                 $this->manager->getRepository('Article')->save($article);
+                $this->app->getSession()->setFlash('L\'article à bien été ajouté');
                 $this->app->getResponse()->redirect('/admin');
             }
         }
@@ -71,6 +72,7 @@ class BackController extends Controller
                         $this->manager->getRepository('Image')->save($image);
                         $article->setImageId($this->manager->getRepository('Image')->getLastId());
                     }
+                    $this->app->getSession()->setFlash('L\'article à bien été modifié');
                     $this->manager->getRepository('Article')->save($article);
                     $this->app->getResponse()->redirect('/admin');
                 }
@@ -89,7 +91,9 @@ class BackController extends Controller
                 $this->manager->getRepository('Image')->delete($article->getImage());
                 $article->getImage()->removeFile($this->app->getConfig()->getParameter('upload_dir'));
             }
+            $this->app->getSession()->setFlash('L\'article à bien été supprimé');
         } else {
+            $this->app->getSession()->setFlash('L\'article n\'existe pas');
         }
         $this->app->getResponse()->redirect('/admin');
     }
@@ -106,8 +110,12 @@ class BackController extends Controller
                 $article->getImage()->removeFile($this->app->getConfig()->getParameter('upload_dir'));
                 $article->setImageId(null);
                 $this->manager->getRepository('Article')->save($article);
+                $this->app->getSession()->setFlash('L\'image à bien été supprimée');
+            } else {
+                $this->app->getSession()->setFlash('L\'article n\'a pas d\'image');
             }
         } else {
+            $this->app->getSession()->setFlash('L\'article n\'existe pas');
         }
         $this->app->getResponse()->redirect('/admin');
     }
