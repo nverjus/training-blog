@@ -2,7 +2,7 @@
 namespace Tests\lib;
 
 use PHPUnit\Framework\TestCase;
-use NVFram\Route;
+use NV\MiniFram\Route;
 
 class RouteTest extends TestCase
 {

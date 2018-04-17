@@ -2,7 +2,7 @@
 namespace Tests\lib;
 
 use PHPUnit\Framework\TestCase;
-use NVFram\Manager;
+use NV\MiniFram\Manager;
 use Blog\BlogApplication;
 use Entity\Article;
 

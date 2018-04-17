@@ -1,5 +1,5 @@
 <?php
-namespace NVFram;
+namespace NV\MiniFram;
 
 class PDOFactory
 {

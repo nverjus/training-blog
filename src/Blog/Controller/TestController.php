@@ -1,8 +1,8 @@
 <?php
 namespace Blog\Controller;
 
-use NVFram\Controller;
-use NVFram\Request;
+use NV\MiniFram\Controller;
+use NV\MiniFram\Request;
 
 class TestController extends Controller
 {

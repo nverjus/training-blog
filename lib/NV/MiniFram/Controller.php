@@ -1,5 +1,5 @@
 <?php
-namespace NVFram;
+namespace NV\MiniFram;
 
 abstract class Controller extends ApplicationComponent
 {
@@ -17,7 +17,7 @@ abstract class Controller extends ApplicationComponent
 
     public function render($view, array $vars = array())
     {
-        $loader = new \Twig_Loader_Filesystem(__DIR__.'/../../src/'.$this->app->getName().'/Views');
+        $loader = new \Twig_Loader_Filesystem(__DIR__.'/../../../src/'.$this->app->getName().'/Views');
         $twig = new \Twig_Environment($loader);
         if ($this->app->getSession()->hasFlash()) {
             $flash = $this->app->getSession()->getFlash();

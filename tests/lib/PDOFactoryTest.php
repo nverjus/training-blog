@@ -2,7 +2,7 @@
 namespace Tests\lib;
 
 use PHPUnit\Framework\TestCase;
-use NVFram\PDOFactory;
+use NV\MiniFram\PDOFactory;
 use Blog\BlogApplication;
 
 class PDOFactoryTest extends TestCase

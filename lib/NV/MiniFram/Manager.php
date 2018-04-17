@@ -1,5 +1,5 @@
 <?php
-namespace NVFram;
+namespace NV\MiniFram;
 
 class Manager extends ApplicationComponent
 {
@@ -10,6 +10,6 @@ class Manager extends ApplicationComponent
         if (!class_exists($repository)) {
             throw new \InvalidArgumentException('The required repository does not exists');
         }
-        return new $repository($this->app, $entity);
+        return new $repository($this->app);
     }
 }

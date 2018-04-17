@@ -1,5 +1,5 @@
 <?php
-namespace NVFram;
+namespace NV\MiniFram;
 
 use Symfony\Component\Yaml\Yaml;
 
@@ -7,7 +7,7 @@ class Config extends ApplicationComponent
 {
     private function readConfigFile()
     {
-        return Yaml::parseFile(__DIR__.'/../../src/'.$this->app->getName().'/config/config.yml');
+        return Yaml::parseFile(__DIR__.'/../../../src/'.$this->app->getName().'/config/config.yml');
     }
 
     public function getDatabaseInfos()
@@ -18,7 +18,7 @@ class Config extends ApplicationComponent
 
     public function getRoutes()
     {
-        return Yaml::parseFile(__DIR__.'/../../src/'.$this->app->getName().'/config/routes.yml');
+        return Yaml::parseFile(__DIR__.'/../../../src/'.$this->app->getName().'/config/routes.yml');
     }
 
 

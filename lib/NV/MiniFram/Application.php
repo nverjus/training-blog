@@ -1,6 +1,6 @@
 <?php
 
-namespace NVFram;
+namespace NV\MiniFram;
 
 abstract class Application
 {
@@ -16,7 +16,7 @@ abstract class Application
         $this->request = new Request($this);
         $this->response = new Response($this);
         $this->config = new Config($this);
-        $loader = new \Twig_Loader_Filesystem(__DIR__.'/../../src/'.$this->name.'/Views');
+        $loader = new \Twig_Loader_Filesystem(__DIR__.'/../../../src/'.$this->name.'/Views');
         $this->twig = new \Twig_Environment($loader);
         $this->session = new Session($this);
     }

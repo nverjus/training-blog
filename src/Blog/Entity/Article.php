@@ -1,7 +1,7 @@
 <?php
 namespace Blog\Entity;
 
-use NVFram\Entity;
+use NV\MiniFram\Entity;
 
 class Article extends Entity
 {

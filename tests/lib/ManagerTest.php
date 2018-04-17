@@ -2,8 +2,8 @@
 namespace Tests\lib;
 
 use PHPUnit\Framework\TestCase;
-use NVFram\Manager;
-use NVFram\Repository;
+use NV\MiniFram\Manager;
+use NV\MiniFram\Repository;
 use Blog\BlogApplication;
 
 class ManagerTest extends TestCase

@@ -2,7 +2,7 @@
 namespace Tests\lib;
 
 use PHPUnit\Framework\TestCase;
-use NVFram\Request;
+use NV\MiniFram\Request;
 use Blog\BlogApplication;
 
 class RequestTest extends TestCase

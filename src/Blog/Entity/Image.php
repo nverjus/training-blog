@@ -1,7 +1,7 @@
 <?php
 namespace Blog\Entity;
 
-use NVFram\File;
+use NV\MiniFram\File;
 
 class Image extends File
 {
