@@ -19,7 +19,7 @@ abstract class File extends Entity
 
     public function uploadFile($file, $uploadDir)
     {
-        $uploadDir = __DIR__.'/../../'.$uploadDir;
+        $uploadDir = __DIR__.'/../../../'.$uploadDir;
         $extension= strtolower(substr(strrchr($file['name'], '.'), 1));
         $fileName = md5(uniqid()) .".". $extension;
         $fileRoad = $uploadDir.$fileName;
@@ -31,7 +31,7 @@ abstract class File extends Entity
 
     public function removeFile($uploadDir)
     {
-        unlink(__DIR__.'/../../'.$uploadDir.$this->adress);
+        unlink(__DIR__.'/../../../'.$uploadDir.$this->adress);
         $this->adress = null;
     }
 }
