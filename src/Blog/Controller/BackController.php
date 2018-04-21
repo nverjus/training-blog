@@ -11,6 +11,8 @@ class BackController extends Controller
 {
     public function executeAdminIndex(Request $request)
     {
+        $this->isAuthorized();
+
         $ArticleRepo = $this->manager->getRepository('Article');
 
         $articles = $ArticleRepo->findAll();
@@ -20,6 +22,7 @@ class BackController extends Controller
 
     public function executeArticleAdd(Request $request)
     {
+        $this->isAuthorized();
         $article = new Article(array());
         $article->setImage(new Image(array()));
 
@@ -45,6 +48,7 @@ class BackController extends Controller
 
     public function executeArticleEdit(Request $request)
     {
+        $this->isAuthorized();
         if ($request->getExists('id') && $request->getData('id') > 0) {
             $article = $this->manager->getRepository('Article')->findById($request->getData('id'));
 
@@ -80,6 +84,7 @@ class BackController extends Controller
 
     public function executeArticleDelete(Request $request)
     {
+        $this->isAuthorized();
         $article = $this->manager->getRepository('Article')->findById($request->getData('id'));
         if ($article !== null) {
             $this->manager->getRepository('Article')->delete($article);
@@ -97,6 +102,8 @@ class BackController extends Controller
 
     public function executeImageDelete(Request $request)
     {
+        $this->isAuthorized();
+
         $article = $this->manager->getRepository('Article')->findById($request->getData('id'));
         if ($article !== null) {
             if ($article->getImageId() !== null) {
@@ -131,5 +138,12 @@ class BackController extends Controller
         }
 
         $this->manager->getRepository('Article')->save($article);
+    }
+
+    public function isAuthorized()
+    {
+        if (!$this->app->getSession()->isAuthentified()) {
+            $this->app->getResponse()->redirect('/login');
+        }
     }
 }

@@ -1,0 +1,35 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('img/home-bg.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>{{ a }}</h1>
+            <span class="subheading">A Blog Theme by Start Bootstrap</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-offset-6 col-md-6">
+        {% if flash is not null %}
+          <div class="alert alert-warning">
+            <p>{{ flash }}</p>
+          </div>
+        {% endif %}
+        <form class="form-signin" method="post">
+          {{ form|raw }}
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

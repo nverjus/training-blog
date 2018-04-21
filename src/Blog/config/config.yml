@@ -5,5 +5,9 @@ database:
   user:             "root"
   password:         ""
 
+security:
+  username:         admin
+  password:         $2y$10$kvkvSr0J15R/BMfNFeJojOlg7BzQqR96RX.BQEi8UvK5MawbNUXVG
+
 articles_per_page:  5
 upload_dir:         web/img/
