@@ -25,7 +25,7 @@ abstract class Controller extends ApplicationComponent
         } else {
             $flash = null;
         }
-        $vars = array_merge($vars, array('flash' => $flash));
+        $vars = array_merge($vars, array('flash' => $flash, 'app' => $this->app));
 
         return $twig->render($view, $vars);
     }

@@ -24,4 +24,12 @@ class Session extends ApplicationComponent
             unset($_SESSION[$attr]);
         }
     }
+
+    public function isAuthentified()
+    {
+        if (isset($_SESSION['auth'])) {
+            return $_SESSION['auth'];
+        }
+        return false;
+    }
 }

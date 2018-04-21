@@ -1,64 +1,75 @@
 index:
-  url:                        /([0-9]*)
-  module:                     front
-  action :                    index
+  url:                         /([0-9]*)
+  module:                      front
+  action :                     index
   varsNames:
         - page
 
 article_view:
-  url:                        /article-([0-9]+)
-  module:                     front
-  action:                     articleView
+  url:                         /article-([0-9]+)
+  module:                      front
+  action:                      articleView
   varsNames:
         - id
 
 contact:
-  url:                        /contact
-  module:                     front
-  action:                     contact
+  url:                         /contact
+  module:                      front
+  action:                      contact
 
 admin_index:
-  url:                        /admin
-  module:                     back
-  action:                     adminIndex
+  url:                         /admin
+  module:                      back
+  action:                      adminIndex
 
 article_add:
-  url:                        /article-add
-  module:                     back
-  action:                     articleAdd
+  url:                         /article-add
+  module:                      back
+  action:                      articleAdd
 
 article_edit:
-  url:                        /article-edit-([0-9]+)
-  module:                     back
-  action:                     articleEdit
+  url:                         /article-edit-([0-9]+)
+  module:                      back
+  action:                      articleEdit
   varsNames:
         - id
 
 article_delete:
-  url:                        /article-delete-([0-9]+)
-  module:                     back
-  action:                     articleDelete
+  url:                         /article-delete-([0-9]+)
+  module:                      back
+  action:                      articleDelete
   varsNames:
         - id
 
 image_delete:
-  url:                        /image-delete-([0-9]+)
-  module:                     back
-  action:                     imageDelete
+  url:                         /image-delete-([0-9]+)
+  module:                      back
+  action:                      imageDelete
   varsNames:
         - id
 
+login:
+  url:                         /login
+  module:                      security
+  action:                      login
+
+logout:
+  url:                         /logout
+  module:                      security
+  action:                      logout
+
+
 test_controller_dont_exists:
-  url:                        /test/controller
-  module:                     nope
-  action:                     nope
+  url:                         /test/controller
+  module:                      nope
+  action:                      nope
 
 test_action_dont_exists:
-  url:                        /test/action
-  module:                     test
-  action:                     lalala
+  url:                         /test/action
+  module:                      test
+  action:                      lalala
 
 test_execute:
-  url:                        /test/execute
-  module:                     test
-  action:                     test
+  url:                         /test/execute
+  module:                      test
+  action:                      test
