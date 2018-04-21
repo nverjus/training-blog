@@ -7,7 +7,11 @@ class TextField extends Field
 
     public function buildWidget()
     {
-        $widget = '<div class="control-group">
+        $widget = "";
+        if (!empty($this->errorMessage)) {
+            $widget .= '<p class="alert alert-danger">'.$this->errorMessage.'</p>';
+        }
+        $widget .= '<div class="control-group">
                <div class="form-group floating-label-form-group controls">';
 
         $widget .= '<label>'.$this->label.'</label>';
@@ -17,10 +21,6 @@ class TextField extends Field
             $widget .= $this->value;
         }
         $widget .= '</textarea>';
-
-        if (!empty($errorMessage)) {
-            $widget .= '<p class="help-block text-danger">'.$this->errorMessage.'</p>';
-        }
 
         return $widget .= '</div></div>';
     }

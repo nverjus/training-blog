@@ -7,7 +7,13 @@ class FileField extends Field
 
     public function buildWidget()
     {
-        $widget = '<div class="control-group">
+        $widget = '';
+
+        if (!empty($this->errorMessage)) {
+            $widget .= '<p class="alert alert-danger">'.$this->errorMessage.'</p>';
+        }
+
+        $widget .= '<div class="control-group">
                <div class="form-group floating-label-form-group controls">';
 
         $widget .= '<label>'.$this->label.'</label>';
@@ -16,11 +22,11 @@ class FileField extends Field
         }
         $widget .= '<input type="file" class="form-control" placeholder="'.$this->label.'" name = "'.$this->name.'">';
 
-        if (!empty($this->errorMessage)) {
-            $widget .= '<p class="help-block text-danger">'.$this->errorMessage.'</p>';
-        }
+        $widget .= '</div></div>';
 
-        return $widget .= '</div></div>';
+
+
+        return $widget;
     }
 
     public function setSize($maxLength)

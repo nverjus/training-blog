@@ -7,7 +7,12 @@ class StringField extends Field
 
     public function buildWidget()
     {
-        $widget = '<div class="control-group">
+        $widget = "";
+
+        if (!empty($this->errorMessage)) {
+            $widget .= '<p class="alert alert-danger">'.$this->errorMessage.'</p>';
+        }
+        $widget .= '<div class="control-group">
                <div class="form-group floating-label-form-group controls">';
 
         $widget .= '<label>'.$this->label.'</label>';
@@ -21,10 +26,6 @@ class StringField extends Field
         }
         $widget .= ' name = "'.$this->name.'">';
 
-        if (!empty($errorMessage)) {
-            $widget .= '<p class="help-block text-danger">'.$this->errorMessage.'</p>';
-        }
-
         return $widget .= '</div></div>';
     }
 
@@ -37,5 +38,10 @@ class StringField extends Field
         } else {
             throw new \InvalidArgumentException('The max length must be an intger greated than zero');
         }
+    }
+
+    public function getMaxLength()
+    {
+        return $this->maxLength;
     }
 }

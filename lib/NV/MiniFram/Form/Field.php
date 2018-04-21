@@ -2,6 +2,7 @@
 namespace NV\MiniFram\Form;
 
 use NV\MiniFram\Hydrator;
+use NV\MiniFram\Validator\Validator;
 
 abstract class Field
 {
@@ -11,6 +12,7 @@ abstract class Field
     protected $label;
     protected $name;
     protected $value;
+    protected $validators = [];
 
     public function __construct(array $data = [])
     {
@@ -23,6 +25,12 @@ abstract class Field
 
     public function isValid()
     {
+        foreach ($this->validators as $validator) {
+            if (!$validator->isValid($this->value)) {
+                $this->errorMessage = $validator->getErrorMessage();
+                return false;
+            }
+        }
         return true;
     }
 
@@ -71,6 +79,20 @@ abstract class Field
     {
         if (is_string($value)) {
             $this->value = $value;
+        }
+    }
+
+    public function getValidators()
+    {
+        return $this->validators;
+    }
+
+    public function setValidators(array $validators)
+    {
+        foreach ($validators as $validator) {
+            if ($validator instanceof Validator && !in_array($validator, $this->validators)) {
+                $this->validators[] = $validator;
+            }
         }
     }
 }
