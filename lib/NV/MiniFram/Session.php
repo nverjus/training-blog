@@ -8,25 +8,20 @@ class Session extends ApplicationComponent
         return isset($_SESSION[$attr]) ? $_SESSION[$attr] : null;
     }
 
+    public function attributeExists($attr)
+    {
+        return isset($_SESSION[$attr]);
+    }
+
     public function setAttribute($attr, $var)
     {
         $_SESSION[$attr] = $var;
     }
 
-    public function hasFlash()
+    public function deleteAttribute($attr)
     {
-        return isset($_SESSION['flash']);
-    }
-
-    public function getFlash()
-    {
-        $flash = $_SESSION['flash'];
-        unset($_SESSION['flash']);
-        return $flash;
-    }
-
-    public function setFlash($var)
-    {
-        $_SESSION['flash'] = $var;
+        if (isset($_SESSION[$attr])) {
+            unset($_SESSION[$attr]);
+        }
     }
 }

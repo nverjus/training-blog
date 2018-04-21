@@ -3,14 +3,15 @@ namespace NV\MiniFram;
 
 class PDOFactory
 {
+    const EXTENSIONS = ['mysql'];
+
+
     public static function getDatabaseConnexion($data)
     {
-        switch ($data['dms']) {
-          case 'MySQL':
-            $data['dms'] = 'mysql';
-            break;
-          default:
-            throw new \InvalidArgumentException('Only MySQL is compatible.');
+        if (in_array(strtolower($data['dms']), self::EXTENSIONS)) {
+            $data['dms'] = strtolower($data['dms']);
+        } else {
+            throw new \InvalidArgumentException('The requested DMS is not compatible.');
         }
 
         $dms = $data['dms'].':host='.$data['host'].';dbname='.$data['dbname'].';charset=utf8';

@@ -3,6 +3,7 @@ namespace Blog\Controller;
 
 use NV\MiniFram\Controller;
 use NV\MiniFram\Request;
+use Blog\Form\ArticleFormBuilder;
 use Blog\Entity\Image;
 use Blog\Entity\Article;
 
@@ -20,28 +21,26 @@ class BackController extends Controller
     public function executeArticleAdd(Request $request)
     {
         $article = new Article(array());
-        $image = new Image(array());
+        $article->setImage(new Image(array()));
 
         if ($request->getMethod() == 'POST') {
             $article->setTitle($request->postData('title'));
             $article->setSubTitle($request->postData('subTitle'));
             $article->setContent($request->postData('content'));
-
-            $image->uploadFile($request->fileData('image'), $this->app->getConfig()->getParameter('upload_dir'));
-            if ($image->getAdress() !== null) {
-                $this->manager->getRepository('Image')->save($image);
-                $article->setImageId($this->manager->getRepository('Image')->getLastId());
-            } else {
-                $article->setImageId(null);
-            }
-
-            if ($article->isValid()) {
-                $this->manager->getRepository('Article')->save($article);
-                $this->app->getSession()->setFlash('L\'article à bien été ajouté');
-                $this->app->getResponse()->redirect('/admin');
-            }
         }
-        return $this->render('Back/articleAdd.html.twig', array('article' => $article));
+        $formBuilder = new ArticleFormBuilder($article);
+
+        $formBuilder->build();
+        $form = $formBuilder->getForm();
+
+        if ($request->getMethod() == 'POST' && $form->isValid()) {
+            $this->saveArticle($article, $request);
+
+            $this->app->getSession()->setAttribute('flash', 'L\'article à bien été ajouté');
+            $this->app->getResponse()->redirect('/admin');
+        }
+
+        return $this->render('Back/articleAdd.html.twig', array('form' => $form->createView()));
     }
 
     public function executeArticleEdit(Request $request)
@@ -54,32 +53,30 @@ class BackController extends Controller
             }
             if ($article->getImageId() !== null) {
                 $article->setImage($this->manager->getRepository('Image')->findById($article->getImageId()));
+            } else {
+                $article->setImage(new Image(array()));
             }
             if ($request->getMethod() == 'POST') {
                 $article->setTitle($request->postData('title'));
                 $article->setSubTitle($request->postData('subTitle'));
                 $article->setContent($request->postData('content'));
-
-                if ($article->isValid()) {
-                    if ($request->fileData('image')['name'] !== null && $request->fileData('image')['name'] !== '') {
-                        if ($article->getImage() === null) {
-                            $image = new Image(array());
-                            $article->setImage($image);
-                        }
-                        $article->getImage()->removeFile($this->app->getConfig()->getParameter('upload_dir'));
-                        $article->getImage()->uploadFile($request->fileData('image'), $this->app->getConfig()->getParameter('upload_dir'));
-
-                        $this->manager->getRepository('Image')->save($image);
-                        $article->setImageId($this->manager->getRepository('Image')->getLastId());
-                    }
-                    $this->app->getSession()->setFlash('L\'article à bien été modifié');
-                    $this->manager->getRepository('Article')->save($article);
-                    $this->app->getResponse()->redirect('/admin');
-                }
             }
-            return $this->render('Back/articleEdit.html.twig', array('article' => $article));
+
+            $formBuilder = new ArticleFormBuilder($article);
+
+            $formBuilder->build();
+            $form = $formBuilder->getForm();
+
+            if ($request->getMethod() == 'POST' && $form->isValid()) {
+                $this->saveArticle($article, $request);
+
+                $this->app->getSession()->setAttribute('flash', 'L\'article à bien été modifié');
+                $this->app->getResponse()->redirect('/admin');
+            }
         }
+        return $this->render('Back/articleEdit.html.twig', array('article' => $article, 'form' => $form->createView()));
     }
+
 
     public function executeArticleDelete(Request $request)
     {
@@ -91,9 +88,9 @@ class BackController extends Controller
                 $this->manager->getRepository('Image')->delete($article->getImage());
                 $article->getImage()->removeFile($this->app->getConfig()->getParameter('upload_dir'));
             }
-            $this->app->getSession()->setFlash('L\'article à bien été supprimé');
+            $this->app->getSession()->setAttribute('flash', 'L\'article à bien été supprimé');
         } else {
-            $this->app->getSession()->setFlash('L\'article n\'existe pas');
+            $this->app->getSession()->setAttribute('flash', 'L\'article n\'existe pas');
         }
         $this->app->getResponse()->redirect('/admin');
     }
@@ -110,13 +107,29 @@ class BackController extends Controller
                 $article->getImage()->removeFile($this->app->getConfig()->getParameter('upload_dir'));
                 $article->setImageId(null);
                 $this->manager->getRepository('Article')->save($article);
-                $this->app->getSession()->setFlash('L\'image à bien été supprimée');
+                $this->app->getSession()->setAttribute('flash', 'L\'image à bien été supprimée');
             } else {
-                $this->app->getSession()->setFlash('L\'article n\'a pas d\'image');
+                $this->app->getSession()->setAttribute('flash', 'L\'article n\'a pas d\'image');
             }
         } else {
-            $this->app->getSession()->setFlash('L\'article n\'existe pas');
+            $this->app->getSession()->setAttribute('flash', 'L\'article n\'existe pas');
         }
         $this->app->getResponse()->redirect('/admin');
+    }
+
+    public function saveArticle(Article $article, Request $request)
+    {
+        if (!empty($article->getImage()->getAdress())) {
+            $article->getImage()->removeFile($this->app->getConfig()->getParameter('upload_dir'));
+        }
+        if (!empty($request->fileData('image')['name'])) {
+            $article->getImage()->uploadFile($request->fileData('image'), $this->app->getConfig()->getParameter('upload_dir'));
+            $this->manager->getRepository('Image')->save($article->getImage());
+            $article->setImageId($this->manager->getRepository('Image')->getLastId());
+        } else {
+            $article->setImageId(null);
+        }
+
+        $this->manager->getRepository('Article')->save($article);
     }
 }

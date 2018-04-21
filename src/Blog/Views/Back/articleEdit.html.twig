@@ -21,9 +21,9 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-
-        {{ include('Back/articleForm.html.twig') }}
-
+        <form action="" method='POST' enctype="multipart/form-data">
+          {{ form|raw }}
+        </form>
         {% if article.imageId != null %}
           <a href="/image-delete-{{ article.id }}">
             <button class="btn btn-primary align-right">Supprimer l'image</button>

@@ -1,7 +1,7 @@
 <?php
 namespace NV\MiniFram;
 
-abstract class Entity extends ApplicationComponent
+abstract class Entity
 {
     protected $id;
 
