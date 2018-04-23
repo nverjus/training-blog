@@ -18,7 +18,7 @@ class ArticleFormBuilder extends FormBuilder
           'name' => 'title',
           'maxLength' => 100,
           'validators' => [
-            new MaxLengthValidator('Le titre ne doit pas faire plus de cent caractère', 100),
+            new MaxLengthValidator('Le titre ne doit pas faire plus de cent caractères', 100),
             new NotNullValidator('L\'article doit avoir un titre'),
           ],
         ]))
@@ -27,7 +27,7 @@ class ArticleFormBuilder extends FormBuilder
           'name' => 'subTitle',
           'maxLength' => 100,
           'validators' => [
-            new MaxLengthValidator('Le sous-titre ne doit pas faire plus de cent caractère', 100),
+            new MaxLengthValidator('Le sous-titre ne doit pas faire plus de cent caractères', 100),
           ],
        ]))
        ->add(new FileField([

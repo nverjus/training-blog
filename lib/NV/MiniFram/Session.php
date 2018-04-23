@@ -25,6 +25,19 @@ class Session extends ApplicationComponent
         }
     }
 
+
+    public function getFlash()
+    {
+        if (!isset($_SESSION['flash'])) {
+            return null;
+        } else {
+            $flash = $_SESSION['flash'];
+            unset($_SESSION['flash']);
+            return $flash;
+        }
+    }
+
+
     public function isAuthentified()
     {
         if (isset($_SESSION['auth'])) {
