@@ -8,7 +8,7 @@ class Response extends ApplicationComponent
         $loader = new \Twig_Loader_Filesystem(__DIR__.'/../../../src/'.$this->app->getName().'/Views');
         $twig = new \Twig_Environment($loader);
         header('HTTP/1.0 404 Not Found');
-        exit($twig->render('404.html.twig'));
+        exit(htmlspecialchars($twig->render('404.html.twig')));
     }
 
     public function redirect(string $uri)
@@ -19,6 +19,6 @@ class Response extends ApplicationComponent
 
     public function send($response)
     {
-        exit($response);
+        exit(htmlspecialchars($response));
     }
 }

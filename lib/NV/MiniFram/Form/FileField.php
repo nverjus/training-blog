@@ -29,14 +29,13 @@ class FileField extends Field
         return $widget;
     }
 
-    public function setSize($maxLength)
+    public function setMaxSize($maxSize)
     {
         $maxSize = (int) $maxSize;
 
-        if ($maxSize > 0) {
-            $this->maxSize = $maxSize;
-        } else {
+        if ($maxSize <= 0) {
             throw new \InvalidArgumentException('The max size must be an intger greated than zero');
         }
+        $this->maxSize = $maxSize;
     }
 }

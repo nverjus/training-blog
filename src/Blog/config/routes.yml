@@ -17,6 +17,11 @@ contact:
   module:                      front
   action:                      contact
 
+about:
+  url:                         /about
+  module:                      front
+  action:                      about
+
 admin_index:
   url:                         /admin
   module:                      back

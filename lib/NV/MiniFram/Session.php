@@ -30,11 +30,10 @@ class Session extends ApplicationComponent
     {
         if (!isset($_SESSION['flash'])) {
             return null;
-        } else {
-            $flash = $_SESSION['flash'];
-            unset($_SESSION['flash']);
-            return $flash;
         }
+        $flash = $_SESSION['flash'];
+        unset($_SESSION['flash']);
+        return $flash;
     }
 
 

@@ -57,7 +57,7 @@ class BackController extends Controller
             }
             if ($article->getImageId() !== null) {
                 $article->setImage($this->manager->getRepository('Image')->findById($article->getImageId()));
-            } else {
+            } elseif ($article->getImageID() !== null) {
                 $article->setImage(new Image(array()));
             }
             if ($request->getMethod() == 'POST') {

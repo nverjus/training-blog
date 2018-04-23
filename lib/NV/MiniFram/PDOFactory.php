@@ -8,11 +8,10 @@ class PDOFactory
 
     public static function getDatabaseConnexion($data)
     {
-        if (in_array(strtolower($data['dms']), self::EXTENSIONS)) {
-            $data['dms'] = strtolower($data['dms']);
-        } else {
+        if (!in_array(strtolower($data['dms']), self::EXTENSIONS)) {
             throw new \InvalidArgumentException('The requested DMS is not compatible.');
         }
+        $data['dms'] = strtolower($data['dms']);
 
         $dms = $data['dms'].':host='.$data['host'].';dbname='.$data['dbname'].';charset=utf8';
 

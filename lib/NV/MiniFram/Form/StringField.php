@@ -33,11 +33,10 @@ class StringField extends Field
     {
         $maxLength = (int) $maxLength;
 
-        if ($maxLength > 0) {
-            $this->maxLength = $maxLength;
-        } else {
+        if ($maxLength <= 0) {
             throw new \InvalidArgumentException('The max length must be an intger greated than zero');
         }
+        $this->maxLength = $maxLength;
     }
 
     public function getMaxLength()

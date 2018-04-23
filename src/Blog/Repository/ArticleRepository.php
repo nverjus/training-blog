@@ -87,7 +87,7 @@ class ArticleRepository extends Repository
         if ($article->isValid()) {
             if ($article->isNew()) {
                 $this->add($article);
-            } else {
+            } elseif (!$article->isNew()) {
                 $this->edit($article);
             }
         }

@@ -24,10 +24,9 @@ class MaxLengthValidator extends Validator
     public function setMaxLength($maxLength)
     {
         $maxLength = (int) $maxLength;
-        if ($maxLength > 0) {
-            $this->maxLength = $maxLength;
-        } else {
+        if ($maxLength <= 0) {
             throw new \InvalidArgumentException('maxLength must be an integer greater than zero');
         }
+        $this->maxLength = $maxLength;
     }
 }

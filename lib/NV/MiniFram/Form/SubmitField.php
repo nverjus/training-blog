@@ -10,11 +10,11 @@ class SubmitField extends Field
 
         $widget .=  '<button type="submit" class="btn btn-primary" id="sendMessageButton">';
 
-        if (!empty($this->value)) {
-            $widget .= $this->value.'</button>';
-        } else {
+        if (empty($this->value)) {
             throw new \InvalidArgumentException('SubmitField must have a value');
         }
+        $widget .= $this->value.'</button>';
+
 
         return $widget .= '</div></div>';
     }

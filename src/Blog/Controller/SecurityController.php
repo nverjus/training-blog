@@ -30,9 +30,8 @@ class SecurityController extends Controller
             if (($user->getUsername() == $credential['username']) && password_verify($user->getPassword(), $credential['password'])) {
                 $this->app->getSession()->setAttribute('auth', true);
                 $this->app->getResponse()->redirect('/admin');
-            } else {
-                $this->app->getSession()->setAttribute('flash', 'Identifiant où mot de passe invalide');
             }
+            $this->app->getSession()->setAttribute('flash', 'Identifiant où mot de passe invalide');
         }
 
         return $this->render('Security/login.html.twig', array('form' => $form->createView()));

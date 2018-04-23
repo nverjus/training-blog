@@ -55,7 +55,7 @@ class ImageRepository extends Repository
         {
             if ($image->isNew()) {
                 $this->add($image);
-            } else {
+            } elseif (!$image->isNew()) {
                 $this->edit($image);
             }
         }

@@ -41,7 +41,7 @@ class FrontController extends Controller
             }
             if ($article->getImageId() !== null) {
                 $article->setImage($this->manager->getRepository('Image')->findById($article->getImageId()));
-            } else {
+            } elseif ($article->getImageId() === null) {
                 $article->setImage(new Image(array('adress' => 'home-bg.jpg')));
             }
 
@@ -76,5 +76,10 @@ class FrontController extends Controller
         }
 
         return $this->render('Front/contact.html.twig', array('form' => $form->createView()));
+    }
+
+    public function executeAbout(Request $request)
+    {
+        return $this->render('Front/about.html.twig');
     }
 }
