@@ -5,6 +5,14 @@ database:
   user:             "root"
   password:         ""
 
+swiftmailer:
+  server:           smtp.gmail.com
+  username:         nverjus@gmail.com
+  password:
+  port:             465
+  encryption:       ssl
+  emailTo:          nverjus@protonmail.com
+
 security:
   username:         admin
   password:         $2y$10$kvkvSr0J15R/BMfNFeJojOlg7BzQqR96RX.BQEi8UvK5MawbNUXVG

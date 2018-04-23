@@ -3,7 +3,10 @@ namespace Blog\Controller;
 
 use NV\MiniFram\Controller;
 use NV\MiniFram\Request;
+use NV\MiniFram\Mailer;
 use Blog\Entity\Image;
+use Blog\Entity\ContactMail;
+use Blog\Form\ContactMailFormBuilder;
 
 class FrontController extends Controller
 {
@@ -20,7 +23,7 @@ class FrontController extends Controller
         }
         $articles = $ArticleRepo->findLastX($this->app->getConfig()->getParameter('articles_per_page'), (int) $page);
         $nbPages = $ArticleRepo->getNbPages($this->app->getConfig()->getParameter('articles_per_page'));
-        
+
         return $this->render('Front/index.html.twig', array(
           'articles' => $articles,
           'page' => (int) $page,
@@ -48,6 +51,30 @@ class FrontController extends Controller
 
     public function executeContact(Request $request)
     {
-        return $this->render('Front/contact.html.twig');
+        $mail = new ContactMail([]);
+
+        if ($request->getMethod() == 'POST') {
+            $mail->setName($request->postData('name'));
+            $mail->setEmail($request->postData('email'));
+            $mail->setContent($request->postData('content'));
+        }
+
+        $builder = new ContactMailFormBuilder($mail);
+        $builder->build();
+        $form = $builder->getForm();
+
+        if ($request->getMethod() == 'POST' && $form->isValid()) {
+            $mail->setTitle('Nouveau message de blog.local');
+            $mailer = new Mailer($this->app->getConfig()->getParameter('swiftmailer'));
+
+            if ($mailer->send($mail)) {
+                $this->app->getSession()->setAttribute('flash', 'Le message à bien été envoyé.');
+                $this->app->getResponse()->redirect('/contact');
+            } else {
+                $this->app->getSession()->setAttribute('flash', 'Erreur lors de l\'envoi du message.');
+            }
+        }
+
+        return $this->render('Front/contact.html.twig', array('form' => $form->createView()));
     }
 }
