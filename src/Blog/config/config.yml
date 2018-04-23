@@ -6,12 +6,12 @@ database:
   password:         ""
 
 swiftmailer:
-  server:           ex : smtp.gmail.com
-  username:         unsername@example.com
+  server:           smtp.gmail.com
+  username:         nverjus@gmail.com
   password:
   port:             465
-  encryption:       ssl or tls
-  emailTo:          your destination
+  encryption:       ssl
+  emailTo:          nverjus@protonmail.com
 
 security:
   username:         admin
