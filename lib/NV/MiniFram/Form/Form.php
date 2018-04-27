@@ -8,11 +8,6 @@ class Form
     protected $entity;
     protected $fields = [];
 
-    public function __construct(Entity $entity)
-    {
-        $this->entity = $entity;
-    }
-
     public function add(Field $field)
     {
         if (!empty($field->getName()) && ($field->getName())) {
@@ -57,5 +52,10 @@ class Form
     public function getEntity()
     {
         return $this->entity;
+    }
+
+    public function setEntity(Entity $entity)
+    {
+        $this->entity = $entity;
     }
 }

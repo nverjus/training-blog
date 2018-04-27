@@ -2,7 +2,7 @@ database:
   dms:              "MySQL"
   host:             "localhost"
   dbname:           "blog"
-  user:             "root"
+  user:             "nijus"
   password:         ""
 
 swiftmailer:

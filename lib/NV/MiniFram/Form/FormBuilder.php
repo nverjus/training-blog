@@ -7,9 +7,12 @@ abstract class FormBuilder
 {
     protected $form;
 
-    public function __construct(Entity $entity)
+    public function __construct($entity = null)
     {
-        $this->form = new Form($entity);
+        $this->form = new Form;
+        if ($entity !== null) {
+            $this->form->setEntity($entity);
+        }
     }
 
     abstract public function build();

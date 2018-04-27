@@ -59,11 +59,9 @@
                   </a>
                 </td>
                 <td>
-                  <a href="article-delete-{{ article.id }}">
-                    <button type="button" class="btn btn-danger">
-                      <i class="fa fa-close fa-lg"></i>
-                    </button>
-                  </a>
+                  <form action="article-delete-{{ article.id }}" method="post">
+                    {{ form|raw }}
+                  </form>
                 </td>
               </tr>
             {% endfor %}

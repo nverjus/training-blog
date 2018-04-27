@@ -44,7 +44,7 @@ class ArticleFormBuilder extends FormBuilder
          ],
        ]))
        ->add(new SubmitField([
-         'value' => 'Envoyer'
+         'value' => 'Envoyer',
        ]));
     }
 }

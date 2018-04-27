@@ -4,6 +4,7 @@ namespace Blog\Controller;
 use NV\MiniFram\Controller;
 use NV\MiniFram\Request;
 use Blog\Form\ArticleFormBuilder;
+use Blog\Form\DeleteFormBuilder;
 use Blog\Entity\Image;
 use Blog\Entity\Article;
 
@@ -17,7 +18,11 @@ class BackController extends Controller
 
         $articles = $ArticleRepo->findAll();
 
-        return $this->render('Back/adminIndex.html.twig', array('articles' => $articles));
+        $builder = new DeleteFormBuilder;
+        $builder->build();
+        $form = $builder->getForm();
+
+        return $this->render('Back/adminIndex.html.twig', array('articles' => $articles, 'form' => $form->createView()));
     }
 
     public function executeArticleAdd(Request $request)
@@ -85,17 +90,25 @@ class BackController extends Controller
     public function executeArticleDelete(Request $request)
     {
         $this->isAuthorized();
-        $article = $this->manager->getRepository('Article')->findById($request->getData('id'));
-        if ($article !== null) {
-            $this->manager->getRepository('Article')->delete($article);
-            if ($article->getImageId() !== null) {
-                $article->setImage($this->manager->getRepository('Image')->findById($article->getImageId()));
-                $this->manager->getRepository('Image')->delete($article->getImage());
-                $article->getImage()->removeFile($this->app->getConfig()->getParameter('upload_dir'));
+        if ($request->getMethod() == 'POST') {
+            if ($request->postData('csrf') != $this->app->getSession()->getAttribute('csrf')) {
+                $this->app->getSession()->setAttribute('flash', 'Les jetons csfr ne correspondent pas.');
+                $this->app->getResponse()->redirect('/admin');
             }
-            $this->app->getSession()->setAttribute('flash', 'L\'article à bien été supprimé');
-        } else {
-            $this->app->getSession()->setAttribute('flash', 'L\'article n\'existe pas');
+
+            $article = $this->manager->getRepository('Article')->findById($request->getData('id'));
+            if ($article !== null) {
+                $this->manager->getRepository('Article')->delete($article);
+
+                if ($article->getImageId() !== null) {
+                    $article->setImage($this->manager->getRepository('Image')->findById($article->getImageId()));
+                    $this->manager->getRepository('Image')->delete($article->getImage());
+                    $article->getImage()->removeFile($this->app->getConfig()->getParameter('upload_dir'));
+                }
+                $this->app->getSession()->setAttribute('flash', 'L\'article à bien été supprimé');
+            } else {
+                $this->app->getSession()->setAttribute('flash', 'L\'article n\'existe pas');
+            }
         }
         $this->app->getResponse()->redirect('/admin');
     }
@@ -103,16 +116,18 @@ class BackController extends Controller
     public function executeImageDelete(Request $request)
     {
         $this->isAuthorized();
-
         $article = $this->manager->getRepository('Article')->findById($request->getData('id'));
+
         if ($article !== null) {
             if ($article->getImageId() !== null) {
                 $article->setImage($this->manager->getRepository('Image')->findById($article->getImageId()));
                 $article->setImageId(null);
+
                 $this->manager->getRepository('Article')->save($article);
                 $this->manager->getRepository('Image')->delete($article->getImage());
+
                 $article->getImage()->removeFile($this->app->getConfig()->getParameter('upload_dir'));
-                $article->setImageId(null);
+
                 $this->manager->getRepository('Article')->save($article);
                 $this->app->getSession()->setAttribute('flash', 'L\'image à bien été supprimée');
             } else {
